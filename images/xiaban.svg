@@ -1,0 +1,62 @@
+<svg width="183" height="40" xmlns="http://www.w3.org/2000/svg">
+  <!-- 左侧区域 -->
+  <rect x="10" y="10" width="62" height="20" rx="4" fill="#f5f5f5" stroke="#ddd" stroke-width="1.5"/>
+  
+  <!-- 文字（左移） -->
+  <text x="30" y="24" text-anchor="middle" font-family="Microsoft YaHei" font-size="12" fill="#333">辛苦了</text>
+  
+  <!-- 茶杯图标（右移） -->
+  <g fill="#333" stroke="#1a1a1a" stroke-width="1" transform="translate(38,0)">
+    <path d="M19.5,15 Q24.5,14 29.5,15 L29.5,25 Q24.5,26 18.5,25 Z"/>
+    <path d="M21.5,15 Q24.5,13 27.5,15" stroke-width="0.8" fill="none"/>
+    <path d="M22.5,13 Q24.5,12 26.5,13" stroke-width="0.8" fill="#444"/>
+    <circle cx="24.5" cy="13" r="0.8" fill="#666"/>
+    <path d="M29.5,17 Q31.5,19 30.5,22" stroke-width="1.2" fill="none"/>
+  </g>
+  
+  <!-- 优化后的过渡动画 -->
+  <g transform="translate(68, 15)">
+    <!-- 蒸汽飘动路径 -->
+    <path id="steamPath1" d="M0,-3 Q5,-10 10,-5" fill="none" stroke="none"/>
+    <path id="steamPath2" d="M5,0 Q10,-8 18,-2" fill="none" stroke="none"/>
+    <path id="steamPath3" d="M8,2 Q16,-5 25,0" fill="none" stroke="none"/>
+    
+    <!-- 茶杯蒸汽动画 -->
+    <g fill="#aaa" stroke="none">
+      <circle r="1.5">
+        <animateMotion dur="2.5s" repeatCount="indefinite">
+          <mpath href="#steamPath1"/>
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.6;0" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="1.2">
+        <animateMotion dur="2.2s" repeatCount="indefinite" begin="0.3s">
+          <mpath href="#steamPath2"/>
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.5;0" dur="2.2s" repeatCount="indefinite" begin="0.3s"/>
+      </circle>
+      <circle r="1.0">
+        <animateMotion dur="3s" repeatCount="indefinite" begin="0.6s">
+          <mpath href="#steamPath3"/>
+        </animateMotion>
+        <animate attributeName="opacity" values="0;0.4;0" dur="3s" repeatCount="indefinite" begin="0.6s"/>
+      </circle>
+    </g>
+    
+    <!-- 调整后的箭头 -->
+    <g transform="translate(18, 0)">
+      <line x1="0" y1="0" x2="25" y2="0" stroke="#888" stroke-opacity="0.7" stroke-width="1.5"/>
+      <g transform="translate(25, 0)">
+        <line x1="0" y1="-5" x2="0" y2="5" stroke="#3498db" stroke-width="1.5"/>
+        <polygon points="0,0 -5,5 5,5" fill="#3498db"/>
+        <animateTransform attributeName="transform" type="translate" 
+                          values="0,0; 2,0; 0,0" 
+                          dur="1.5s" repeatCount="indefinite"/>
+      </g>
+    </g>
+  </g>
+  
+  <!-- 右侧区域 -->
+  <rect x="92" y="10" width="58" height="20" rx="4" fill="#f5f5f5" stroke="#ddd" stroke-width="1.5"/>
+  <text x="120.5" y="24" text-anchor="middle" font-family="Microsoft YaHei" font-size="12" fill="#333">下班啦</text>
+</svg>
