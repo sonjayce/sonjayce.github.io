@@ -1,0 +1,1 @@
+var posts=["2025/07/10/Windows-本地搭建部署-Hexo：从入坑到毕业/","2026/04/30/文章标题/"];function toRandomPost(){pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);};

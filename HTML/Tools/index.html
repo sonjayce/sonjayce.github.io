@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多功能工具站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="CSS/styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- 顶部导航 -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-wrench text-blue-500 text-2xl"></i>
+                <h1 class="text-xl font-bold text-gray-800">多功能工具站</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#" class="text-gray-600 hover:text-blue-500 transition-colors">首页</a>
+                <a href="#" class="text-gray-600 hover:text-blue-500 transition-colors">文档</a>
+                <a href="#" class="text-gray-600 hover:text-blue-500 transition-colors">关于</a>
+            </div>
+            <button class="md:hidden text-gray-600">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main class="flex-grow container mx-auto p-4 md:p-6 flex flex-col md:flex-row gap-6">
+        <!-- 工具列表侧边栏 -->
+        <aside class="w-full md:w-64 bg-white rounded-xl shadow-md p-4 md:h-[calc(100vh-120px)] md:fixed overflow-y-auto">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">工具列表</h2>
+            <div class="space-y-2">
+                <button id="tool-base64" class="tool-btn w-full text-left py-2 px-4 rounded-lg hover:bg-gray-100 transition-colors flex items-center">
+                    <i class="fa fa-lock mr-2 text-blue-500"></i>
+                    <span>Base64 加解密</span>
+                </button>
+                <button id="tool-json" class="tool-btn w-full text-left py-2 px-4 rounded-lg hover:bg-gray-100 transition-colors flex items-center">
+                    <i class="fa fa-code mr-2 text-yellow-500"></i>
+                    <span>JSON 格式化</span>
+                </button>
+                <button id="tool-hash" class="tool-btn w-full text-left py-2 px-4 rounded-lg hover:bg-gray-100 transition-colors flex items-center">
+                    <i class="fa fa-key mr-2 text-green-500"></i>
+                    <span>哈希计算</span>
+                </button>
+                <button id="tool-timestamp" class="tool-btn w-full text-left py-2 px-4 rounded-lg hover:bg-gray-100 transition-colors flex items-center">
+                    <i class="fa fa-clock-o mr-2 text-purple-500"></i>
+                    <span>时间戳转换</span>
+                </button>
+                <button id="tool-encode" class="tool-btn w-full text-left py-2 px-4 rounded-lg hover:bg-gray-100 transition-colors flex items-center">
+                    <i class="fa fa-exchange mr-2 text-red-500"></i>
+                    <span>URL 编码</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- 工具内容区 -->
+        <div class="flex-grow md:ml-72">
+            <!-- Base64工具 -->
+            <div id="base64-tool" class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-gray-800 flex items-center">
+                        <i class="fa fa-lock mr-2 text-blue-500"></i>
+                        Base64 加解密工具
+                    </h2>
+                    <div class="text-sm text-gray-500">
+                        <span id="char-count">字符数: 0</span>
+                    </div>
+                </div>
+
+                <!-- 输入区域 -->
+                <div class="mb-6">
+                    <label for="input-text" class="block text-sm font-medium text-gray-700 mb-2">输入文本:</label>
+                    <div class="relative">
+                        <textarea id="input-text" class="w-full h-40 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none" placeholder="请输入需要处理的文本..."></textarea>
+                        <div class="absolute right-3 bottom-3 text-xs text-gray-500">
+                            <span id="input-count">0</span> 字符
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 按钮区域 -->
+                <div class="flex flex-wrap gap-3 mb-6">
+                    <button id="btn-encode" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center">
+                        <i class="fa fa-lock mr-2"></i> 加密为Base64
+                    </button>
+                    <button id="btn-decode" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors flex items-center">
+                        <i class="fa fa-unlock mr-2"></i> 解密Base64
+                    </button>
+                    <button id="btn-copy" class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors flex items-center">
+                        <i class="fa fa-copy mr-2"></i> 复制结果
+                    </button>
+                    <button id="btn-clear" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors flex items-center">
+                        <i class="fa fa-refresh mr-2"></i> 清空
+                    </button>
+                </div>
+
+                <!-- 输出区域 -->
+                <div>
+                    <label for="output-text" class="block text-sm font-medium text-gray-700 mb-2">输出结果:</label>
+                    <div class="relative">
+                        <textarea id="output-text" class="w-full h-40 p-3 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none" placeholder="处理结果将显示在这里..." readonly></textarea>
+                        <div class="absolute right-3 bottom-3 text-xs text-gray-500">
+                            <span id="output-count">0</span> 字符
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 其他工具内容将在这里显示 -->
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white border-t border-gray-200 py-4">
+        <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+            <p>© 2025 多功能工具站 | 为开发者和设计师打造</p>
+        </div>
+    </footer>
+
+    <script src="JS/script.js"></script>
+</body>
+</html>
+    
+    
